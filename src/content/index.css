@@ -2,6 +2,9 @@
   background-color: white;
   display: flex;
   justify-content: center;
+  gap: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .messengerButton {
@@ -17,4 +20,22 @@
 
 .messengerButton:hover {
   background-color: #c0e0ff;
+}
+
+#openaiSpinner {
+  animation-name: spin;
+  animation-duration: 4s;
+  /* Things added */
+  animation-iteration-count: infinite;
+  transform-origin: 50% 50%;
+  display: inline-block;
+  /* <--- */
+}
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
