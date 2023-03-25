@@ -36,7 +36,11 @@ async function openaiRequest(text: string): Promise<string[] | undefined> {
   return fetch('https://api.openai.com/v1/chat/completions', requestOptions)
   .then(response => response.json())
   .then(data => {
-    return data.choices.map((choice: any) => choice.message.content.trim());
+    return data.choices.map((choice: any) => {
+      const trimmed = choice.message.content.trim()
+      const noQuotes = trimmed.startsWith('"') && trimmed.endsWith('"') ? trimmed.slice(1, -1) : trimmed;
+      return noQuotes;
+    });
   }).catch(err => {
     if (ApiKey) {
       alert('Unable to fetch response from OpenAI. Please check your API key and try again.');
@@ -88,7 +92,7 @@ class MessengerGPTApp extends Component<{}, IMessengerGPTAppState> {
     const response = await openaiRequest(`Here is a conversation:
 ${conversation.join('\n')}
 
-What is something You could write next in the conversation? Respond only with the message, do not include "You sent:". Do not wrap the output in quotes.`);
+What is something You could write next in the conversation? Respond only with the message, do not include "You sent:".`);
     if (!response) {
       this.setState({
         loading: false
