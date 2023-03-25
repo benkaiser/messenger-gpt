@@ -22,11 +22,8 @@ async function openaiRequest(text: string): Promise<string[] | undefined> {
     body: JSON.stringify({
       'model': 'gpt-3.5-turbo',
       n: 3,
+      temperature: 0.7,
       messages: [
-        {
-          role: 'system',
-          content: 'Answer as concisely as possible.'
-        },
         {
           role: 'user',
           content: text
@@ -93,7 +90,7 @@ class MessengerGPTApp extends Component<{}, IMessengerGPTAppState> {
     const response = await openaiRequest(`Here is a conversation:
 ${conversation.join('\n')}
 
-What is something You could write next in the conversation? Respond only with the message, do not include "You sent:".`);
+What is something You could write next in the conversation? Respond only with the message, do not include "You sent:". If you cannot find a reasonable message for You to write, just write a greeting from the perspective of You. Never write a message from the perspective of anyone except You.`);
     if (!response) {
       this.setState({
         loading: false
@@ -132,7 +129,18 @@ function getConversationHistory(): string[] {
   .filter(elem => elem.classList.length > 0)
   .map(row => {
     const name = row.firstChild!.firstChild!.firstChild!.textContent;
-    const message = row.firstChild!.firstChild!.childNodes[1].textContent || row.firstChild!.firstChild!.childNodes[2].textContent;
+    // message from others
+    let message = row.firstChild!.firstChild!.childNodes[1].textContent;
+    // message from us
+    if (!message) {
+      const secondNode = (row.firstChild!.firstChild!.childNodes[2] as HTMLElement);
+      if (secondNode.querySelectorAll('span').length) {
+        // increased specificity to remove chance of "Delivered" being attached to end of message
+        message = secondNode.querySelectorAll('span')[0].textContent;
+      } else {
+        message = secondNode.textContent;
+      }
+    }
     if (!message) {
       return undefined;
     }
