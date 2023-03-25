@@ -21,6 +21,7 @@
     "fmt": "prettier --write '**/*.{tsx,ts,json,css,scss,md}'"
   },
   "dependencies": {
+    "gpt-token-utils": "^1.2.0",
     "preact": "^10.8.2"
   },
   "devDependencies": {

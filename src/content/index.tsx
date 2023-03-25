@@ -1,6 +1,7 @@
 import { Component, render } from "preact";
 import './index.css';
 import { OPENAI_SETTING_KEY } from "../constants";
+import { encode } from 'gpt-token-utils';
 
 async function openaiRequest(text: string): Promise<string[] | undefined> {
   const ApiKey = await new Promise<string>((resolve) => {
@@ -88,7 +89,7 @@ class MessengerGPTApp extends Component<{}, IMessengerGPTAppState> {
     this.setState({
       loading: true
     });
-    const conversation = getConversationHistory();
+    const conversation = shrinkConversation(getConversationHistory(), 3000);
     const response = await openaiRequest(`Here is a conversation:
 ${conversation.join('\n')}
 
@@ -125,7 +126,7 @@ function renderEntryPoint() {
   }
 }
 
-function getConversationHistory() {
+function getConversationHistory(): string[] {
   const conversationBlock = document.querySelectorAll('[role="main"]')[0];
   const chatHistory = [...conversationBlock.querySelectorAll('[role="row"]')]
   .filter(elem => elem.classList.length > 0)
@@ -136,8 +137,30 @@ function getConversationHistory() {
       return undefined;
     }
     return `${name}: ${message}`;
-  }).filter(message => !!message);
+  }).filter(message => !!message) as string[];
   return chatHistory;
+}
+
+function countTokens(text: string): number {
+  return encode(text).length;
+}
+
+function shrinkConversation(conversation: string[], maxTokens: number) {
+  const shrunkConversation = [];
+  let tokenCount = 0;
+  for (let i = conversation.length - 1; i >= 0; i--) {
+    const message = conversation[i];
+    const messageTokens = countTokens(message);
+    if (tokenCount + messageTokens < maxTokens) {
+      shrunkConversation.unshift(message);
+      tokenCount += messageTokens + 1; // 1 token for newline
+    } else {
+      console.log('Hit token limit');
+      break;
+    }
+  }
+  console.log('used tokens: ' + tokenCount);
+  return shrunkConversation;
 }
 
 function listenForChanges() {
