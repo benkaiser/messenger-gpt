@@ -18,6 +18,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "build-icons": "convert public/icons/icon-512.png -resize 16x16 public/img/logo-16.png && convert public/icons/icon-512.png -resize 32x32 public/img/logo-32.png && convert public/icons/icon-512.png -resize 48x48 public/img/logo-48.png && convert public/icons/icon-512.png -resize 128x128 public/img/logo-128.png",
     "fmt": "prettier --write '**/*.{tsx,ts,json,css,scss,md}'"
   },
   "dependencies": {

@@ -19,7 +19,7 @@ export const Options = () => {
 
   return (
     <main>
-      <h3>Options</h3>
+      <h3>Messenger GPT - Extension Options</h3>
       <p>To use this extension, a valid OpenAI API key must be provided. You can <a href='https://platform.openai.com/account/api-keys' target='_blank'>generate one here</a>.</p>
       <div className='optionsItems'>
         <label for="openai-api-key">OpenAI API Key</label>

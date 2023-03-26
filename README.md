@@ -1,6 +1,6 @@
-# messenger-gpt
+# Messenger GPT
 
-> a chrome extension tools built with Vite + Preact, and Manifest v3
+> Generate replies for Facebook Messenger conversations using ChatGPT
 
 ## Installing
 
