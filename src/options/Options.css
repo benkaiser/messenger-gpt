@@ -9,24 +9,14 @@
 
 main {
   text-align: center;
-  padding: 1em;
+  padding: 2em;
   margin: 0 auto;
   font-size: 18px;
 }
 
-h3 {
-  color: #673ab8;
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  font-weight: 200;
-  line-height: 1.2rem;
+h2 {
+  font-size: 2rem;
   margin: 2rem auto;
-}
-
-h6 {
-  font-size: 0.5rem;
-  color: #333333;
-  margin: 0.5rem;
 }
 
 .optionsItems {
@@ -35,5 +25,13 @@ h6 {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  gap: 10px;
+  gap: 16px;
+}
+
+#openai-api-key {
+  max-width: 425px;
+}
+
+.saveBtn {
+  margin-top: 16px;
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
 import { OPENAI_SETTING_KEY } from '../constants';
-import './Options.css'
 
 export const Options = () => {
   const [openaiApiKey, setOpenaiApiKey] = useState<string>('');
@@ -20,13 +19,13 @@ export const Options = () => {
 
   return (
     <main>
-      <h2>Options</h2>
+      <h3>Options</h3>
       <p>To use this extension, a valid OpenAI API key must be provided. You can <a href='https://platform.openai.com/account/api-keys' target='_blank'>generate one here</a>.</p>
       <div className='optionsItems'>
         <label for="openai-api-key">OpenAI API Key</label>
-        <input type="text" id="openai-api-key" name="openai-api-key" value={openaiApiKey} onChange={onChange} />
-        <button onClick={save}>Save</button>
+        <input className='form-control' type="text" id="openai-api-key" name="openai-api-key" value={openaiApiKey} onChange={onChange} />
       </div>
+      <button className='btn btn-primary saveBtn' onClick={save}>Save</button>
     </main>
   )
 }
