@@ -2,19 +2,14 @@
 
 > Generate replies for Facebook Messenger conversations using ChatGPT
 
-## Installing
+![screenshot showing usage](https://github.com/benkaiser/messenger-gpt/raw/master/assets/screenshot/usage.png)
 
-1. Check if your `Node.js` version is >= **14**.
-2. Change or configurate the name of your extension on `src/manifest`.
-3. Run `npm install` to install the dependencies.
+You can install from the chrome web store here (TODO: add link).
 
-## Developing
-
-run the command
+## Running from source
 
 ```shell
 $ cd messenger-gpt
-
 $ npm run dev
 ```
 
@@ -22,12 +17,6 @@ $ npm run dev
 
 1. set your Chrome browser 'Developer mode' up
 2. click 'Load unpacked', and select `messenger-gpt/build` folder
-
-### Nomal FrontEnd Developer Mode
-
-1. access `http://localhost:3000/`
-2. when debugging popup page, open `/popup.html`
-3. when debugging options page, open `/options.html`
 
 ## Packing
 

@@ -3,7 +3,7 @@ import { defineManifest } from '@crxjs/vite-plugin'
 export default defineManifest({
   name: 'messenger-gpt',
   description: 'Generate replies for messenger.com using ChatGPT',
-  version: '0.0.0',
+  version: '1.0.0',
   manifest_version: 3,
   icons: {
     '16': 'img/logo-16.png',
