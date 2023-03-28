@@ -37,7 +37,9 @@ async function openaiRequest(text: string): Promise<string[] | undefined> {
     return data.choices.map((choice: any) => {
       const trimmed = choice.message.content.trim()
       const noQuotes = trimmed.startsWith('"') && trimmed.endsWith('"') ? trimmed.slice(1, -1) : trimmed;
-      return noQuotes;
+      const noYouSent = noQuotes.startsWith('You sent: ') ? noQuotes.slice(10) : noQuotes;
+      const noYou = noYouSent.startsWith('You: ') ? noYouSent.slice(5) : noYouSent;
+      return noYou;
     });
   }).catch(err => {
     if (ApiKey) {
@@ -90,7 +92,7 @@ class MessengerGPTApp extends Component<{}, IMessengerGPTAppState> {
     const response = await openaiRequest(`Here is a conversation:
 ${conversation.join('\n')}
 
-What is something You could write next in the conversation? Respond only with the message, do not include "You sent:". If you cannot find a reasonable message for You to write, just write a greeting from the perspective of You. Never write a message from the perspective of anyone except You.`);
+What should "You" write next? Respond using the first person of You. Keep it relatively short.`);
     if (!response) {
       this.setState({
         loading: false
