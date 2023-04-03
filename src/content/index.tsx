@@ -138,7 +138,7 @@ function getConversationHistory(): string[] {
       const secondNode = (row.firstChild!.firstChild!.childNodes[2] as HTMLElement);
       if (secondNode.querySelectorAll('span').length) {
         // increased specificity to remove chance of "Delivered" being attached to end of message
-        message = secondNode.querySelectorAll('span')[0].textContent;
+        message = secondNode.querySelectorAll('span')[0].textContent || secondNode.querySelectorAll('span')[1].textContent;
       } else {
         message = secondNode.textContent;
       }
