@@ -4,7 +4,7 @@
 
 ![screenshot showing usage](https://github.com/benkaiser/messenger-gpt/raw/master/assets/screenshot/usage.png)
 
-You can install from the chrome web store here (TODO: add link).
+You can install from [the chrome web store](https://chrome.google.com/webstore/detail/messenger-gpt/pfggffgolodggkhmejbeoghfpcfpkieb?hl=en-GB&authuser=0) or alternatively follow the below steps to run from source.
 
 ## Running from source
 
